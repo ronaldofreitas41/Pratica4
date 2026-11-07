@@ -2,8 +2,8 @@ package co.inter.cashback.repository;
 
 import co.inter.cashback.domain.costumer.Customer;
 import io.micronaut.data.annotation.Query;
-import io.micronaut.data.jpa.repository.JpaRepository;
 import io.micronaut.data.annotation.Repository;
+import io.micronaut.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
-    @Query("UPDATE Customer c SET c.balance + :amount"+
-            "WHERE c.id = :customerID")
-    BigDecimal cashbackCalculate(UUID customerId, BigDecimal amount);
+    @Query("UPDATE Customer c SET c.balance = c.balance + :amount " +
+            "WHERE c.id = :customerId")
+    void cashbackCalculate(UUID customerId, BigDecimal amount);
 }

@@ -1,5 +1,6 @@
 package co.inter.cashback.controller;
 
+import co.inter.cashback.domain.costumer.CashbackResponse;
 import co.inter.cashback.domain.costumer.CustomerRequestDTO;
 import co.inter.cashback.domain.costumer.CustomerResponseDTO;
 import co.inter.cashback.service.CustomerService;
@@ -87,7 +88,7 @@ public class CustomerController {
     /*
      *-----------------------------------------------------------------------------------*
      * Metodo: GET                                                                       *
-     * Path: /api/costumer/{id}                                                    *
+     * Path: /api/costumer/{id}/cashback                                                    *
      *-----------------------------------------------------------------------------------*
      * Descrição: Função para buscar no banco o registro que tenha o id passado no Path. *
      *-----------------------------------------------------------------------------------*
@@ -95,12 +96,12 @@ public class CustomerController {
      * Returns: CostumerResponseDTO                                                      *
      *-----------------------------------------------------------------------------------*
      */
-/*
+
     @Get("/{id}/cashback")
-    public HttpResponse<CustomerResponseDTO> getCashbacks(@PathVariable UUID id) {
-        return HttpResponse.ok(costumerService.getCashbacksById(id));
+    public HttpResponse<CashbackResponse> getCashbacks(@PathVariable UUID id) {
+        return HttpResponse.ok(costumerService.getAllCustomerReleases(id));
     }
-*/
+
     /*
      *--------------------------------------------------------------------*
      * Metodo: POST                                                       *

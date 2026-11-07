@@ -11,9 +11,6 @@ import java.util.UUID;
 @Serdeable
 public record CashbackResponse(
    UUID customerId,
-   UUID PurchaseId,
-   Category category,
    BigDecimal balance,
-   BigDecimal purchaseAmount,
-   List<Releases> realeases
+   List<Releases> entries
 ) {}

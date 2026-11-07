@@ -169,6 +169,11 @@
 
                     <annotationProcessorPaths combine.self="override">
                         <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.42</version>
+                        </path>
+                        <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-inject-java</artifactId>
                             <version>${micronaut.core.version}</version>

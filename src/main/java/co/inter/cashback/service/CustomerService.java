@@ -4,7 +4,9 @@ import co.inter.cashback.domain.costumer.CashbackResponse;
 import co.inter.cashback.domain.costumer.Customer;
 import co.inter.cashback.domain.costumer.CustomerRequestDTO;
 import co.inter.cashback.domain.costumer.CustomerResponseDTO;
+import co.inter.cashback.domain.releases.Releases;
 import co.inter.cashback.repository.CustomerRepository;
+import co.inter.cashback.repository.ReleasesRepository;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.exceptions.HttpStatusException;
 import jakarta.inject.Inject;
@@ -34,6 +36,9 @@ public class CustomerService {
      */
     @Inject
     CustomerRepository customerRepository;
+
+    @Inject
+    ReleasesRepository releasesRepository;
 
     /*
      *--------------------------------------------------------------------*
@@ -75,7 +80,7 @@ public class CustomerService {
      *--------------------------------------------------------------------*
      */
 
-    public CashbackResponse getAllCustomerData(UUID id) {
+    public CashbackResponse getAllCustomerReleases(UUID id) {
 
         // Busca a entidade no banco de dados via id e caso a mesma não seja encontrada
         // retornará um Status 404 com a mensagem de dados nao encontrado para aquele id
@@ -83,12 +88,14 @@ public class CustomerService {
                 .orElseThrow(() -> new HttpStatusException(HttpStatus.NOT_FOUND,
                         "Dado não encontrado para o id: " + id));
 
+        List<Releases> releases = releasesRepository.getAllCostuerReleases(customer.getId());
+
         //Retorna a conversão da Entity em um ResponseDTO
-        return new CustomerResponseDTO(
+        return new CashbackResponse(
                 customer.getId(),
-                customer.getName(),
-                customer.getBalance()
-        );
+                customer.getBalance(),
+                 releases
+                );
     }
 
     /*
@@ -138,7 +145,6 @@ public class CustomerService {
         //Sets com os dados da Entidade Costumer
         customer.setName(body.name());
         customer.setBalance(BigDecimal.ZERO);
-
 
 
         // Salvando Entity no banco
