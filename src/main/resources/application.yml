@@ -1,0 +1,14 @@
+micronaut:
+  application:
+    name: cashback
+datasources:
+  default:
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+    dialect: POSTGRES
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
